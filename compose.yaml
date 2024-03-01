@@ -13,7 +13,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: localhost
       WORDPRESS_DB_USER: admin
-      WORDPRESS_DB_PASSWORD: admin
+      WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DB_NAME: wp
     volumes:
       - ./wp-app:/var/www/html
@@ -27,8 +27,8 @@ services:
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
-      MYSQL_RANDOM_ROOT_PASSWORD: 'root'
+      MYSQL_PASSWORD: password
+      MYSQL_RANDOM_ROOT_PASSWORD: 'password'
     volumes:
       - ./wp-data:/var/lib/mysql
 
