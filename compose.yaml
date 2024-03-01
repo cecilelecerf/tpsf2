@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    hostname: localhost
+    environment:
+      WORDPRESS_DB_HOST: localhost
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: admin
+      WORDPRESS_DB_NAME: wp
+    volumes:
+      - ./wp-app:/var/www/html
+      - ./config/php.conf.ini:/usr/local/etc/php/conf.d/uploads.ini
+      # - ./config/wordpress.conf:/etc/apache2/sites-available/000-default.conf
+  
+  db:
+    image: mysql:8.0.28
+    restart: always
+    platform: linux/amd64
+    environment:
+      MYSQL_DATABASE: wp
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_RANDOM_ROOT_PASSWORD: 'root'
+    volumes:
+      - ./wp-data:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
